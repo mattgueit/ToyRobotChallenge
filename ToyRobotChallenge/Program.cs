@@ -1,12 +1,14 @@
 ﻿using System;
 
-namespace ToyRobotChallenge.CLI
+namespace ToyRobotChallenge
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var application = new Application();
+
+            application.Run();
         }
     }
 }
