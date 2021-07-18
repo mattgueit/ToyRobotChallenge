@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ToyRobotChallenge.Library.Robot;
+using ToyRobotChallenge.Commands;
 using Microsoft.Extensions.Logging;
 
 namespace ToyRobotChallenge.Simulation
@@ -9,29 +11,44 @@ namespace ToyRobotChallenge.Simulation
         private readonly ILogger<Simulator> _logger;
         private readonly IRobot _robot;
 
-        private static readonly string _placeCommandString = "PLACE";
-        private static readonly string _moveCommandString = "MOVE";
-        private static readonly string _leftCommandString = "LEFT";
-        private static readonly string _rightCommandString = "RIGHT";
-        private static readonly string _reportCommandString = "REPORT";
-
         public Simulator(ILogger<Simulator> logger, IRobot robot)
         {
             _logger = logger;
             _robot = robot;
         }
 
-        public void ExecuteRobotCommands(List<string> commands)
+        public void ExecuteRobotCommands(List<Command> commands)
         {
             _logger.LogInformation("Starting Simulator...");
 
             foreach(var command in commands)
             {
-                _logger.LogDebug("Executing command: {command}", command);
+                _logger.LogDebug("Executing command: {CommandName}", command.CommandName);
 
-                if (command == _placeCommandString)
+                if (command.GetType() == typeof(PlaceCommand))
                 {
-                    //_robot.Place();
+                    var placeCommand = (PlaceCommand)command;
+                    _robot.Place(placeCommand.X, placeCommand.Y, placeCommand.Direction);
+                }
+                else if (command.CommandName == ValidCommands.MoveCommandName)
+                {
+                    _robot.Move();
+                }
+                else if (command.CommandName == ValidCommands.TurnLeftCommandName)
+                {
+                    _robot.TurnLeft();
+                }
+                else if (command.CommandName == ValidCommands.TurnRightCommandName)
+                {
+                    _robot.TurnRight();
+                }
+                else if (command.CommandName == ValidCommands.ReportCommandName)
+                {
+                    Console.WriteLine(_robot.Report());
+                }
+                else
+                {
+                    _logger.LogError("The command: {command} was deemed valid but is not supported by the application.", command.CommandName);
                 }
             }
         }

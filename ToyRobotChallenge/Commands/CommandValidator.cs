@@ -1,42 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using ToyRobotChallenge.Library.Positioning;
 
 namespace ToyRobotChallenge.Commands
 {
-    public class CommandValidator
+    public static class CommandValidator
     {
-        private readonly HashSet<string> _validCommands;
-        private static readonly string _placeCommandString = "PLACE";
-
-        public CommandValidator()
-        {
-            _validCommands = new HashSet<string>()
-            {
-                "PLACE",
-                "MOVE",
-                "LEFT",
-                "RIGHT",
-                "REPORT"
-            };
-        }
-
         /// <summary>
         /// Check if our command is valid.
         /// </summary>
-        public bool IsValid(string command)
+        public static bool IsCommandValid(string command)
         {
-            var sanitisedCommand = SanitiseCommandForValidation(command);
-
-            if (_validCommands.Contains(sanitisedCommand))
+            if (ValidCommands.Contains(command))
             {
-                if (sanitisedCommand == _placeCommandString)
-                {
-                    return IsPlaceCommandValid(command);
-                }
-
                 return true;
             }
 
@@ -46,59 +22,36 @@ namespace ToyRobotChallenge.Commands
         /// <summary>
         /// The PLACE command requires a bit more validation. Method returns true if valid.
         /// </summary>
-        private static bool IsPlaceCommandValid(string command)
+        public static bool PlaceParametersAreValid(string placeCommand)
         {
-            var commaSeparatedCommand = command.Split(",");
+            var placeParameters = placeCommand.Substring(5);
 
-            if (commaSeparatedCommand.Length != 4)
+            var commaSeparatedParameters = placeParameters.Split(",");
+
+            if (commaSeparatedParameters.Length != 3)
             {
                 return false;
             }
 
-            if (!int.TryParse(commaSeparatedCommand[1], out _))
+            // X
+            if (!int.TryParse(commaSeparatedParameters[0], out _))
             {
                 return false;
             }
 
-            if (!int.TryParse(commaSeparatedCommand[2], out _))
+            // Y
+            if (!int.TryParse(commaSeparatedParameters[1], out _))
             {
                 return false;
             }
 
-            if (!Enum.IsDefined(typeof(CardinalPoint), commaSeparatedCommand[3]))
+            // NORTH, SOUTH, EAST, or WEST
+            if (!Enum.IsDefined(typeof(CardinalPoint), commaSeparatedParameters[2]))
             {
                 return false;
             }
             
             return true;
-        }
-
-        /// <summary>
-        /// Get rid of unwanted characters from our command to check that it's valid
-        /// </summary>
-        private static string SanitiseCommandForValidation(string command)
-        {
-            string sanitised;
-
-            sanitised = RemoveWhitespace(command);
-            sanitised = GetSubstringBeforeFirstComma(sanitised);
-
-            return sanitised;
-        }
-
-        /// <summary>
-        /// Remove whitespaces from command
-        /// </summary>
-        private static string RemoveWhitespace(string command)
-        {
-            return Regex.Replace(command, @"\s+", "");
-        }
-
-        private static string GetSubstringBeforeFirstComma(string command)
-        {
-            var commaSeparatedCommand = command.Split(",");
-
-            return commaSeparatedCommand.First();
         }
     }
 }

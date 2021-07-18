@@ -1,13 +1,14 @@
 ﻿using System.IO;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Serilog;
 using ToyRobotChallenge.Commands;
 using ToyRobotChallenge.Data;
 using ToyRobotChallenge.Library.Environment;
 using ToyRobotChallenge.Library.Robot;
 using ToyRobotChallenge.Simulation;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Serilog;
+
 
 namespace ToyRobotChallenge
 {
@@ -15,19 +16,14 @@ namespace ToyRobotChallenge
     {
         static void Main(string[] args)
         {
-            foreach(var arg in args)
-            {
-                System.Console.WriteLine(arg);
-            }
-
-            var host = Startup();
+            var host = StartupConfiguration();
 
             var application = ActivatorUtilities.CreateInstance<Application>(host.Services);
 
             application.Run();
         }
 
-        static IHost Startup()
+        static IHost StartupConfiguration()
         {
             var builder = new ConfigurationBuilder();
             ConfigurationSetup(builder);

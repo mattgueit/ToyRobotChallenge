@@ -22,9 +22,11 @@ namespace ToyRobotChallenge.Library.Robot
         /// <summary>
         /// Let the robot sit on a valid spot on the board and face some direction.
         /// </summary>
-        public void Place(Coordinates position, CardinalPoint cardinalPoint)
+        public void Place(int x, int y, CardinalPoint cardinalPoint)
         {
-            _logger.LogDebug($"Placing the robot in position: ({position.X},{position.Y}) facing {cardinalPoint}");
+            _logger.LogDebug($"Placing the robot in position: ({x},{y}) facing {cardinalPoint}");
+
+            var position = new Coordinates(x, y);
 
             if (_table.IsValidPosition(position))
             {
@@ -34,7 +36,7 @@ namespace ToyRobotChallenge.Library.Robot
             }
             else
             {
-                // Perhaps a debug message here to say that the attempted placement was invalid?
+                _logger.LogDebug("Ignored attempt to place the robot out of bounds ({x},{y})", x, y);
             }
         }
 
@@ -55,14 +57,25 @@ namespace ToyRobotChallenge.Library.Robot
         }
 
         /// <summary>
-        /// Turn the robot either left or right.
+        /// Turn the robot in the left direction.
         /// </summary>
-        public void Turn(TurningDirection turningDirection)
+        public void TurnLeft()
         {
             if (!HasBeenPlaced)
                 return;
 
-            FacingDirection.Turn(turningDirection);
+            FacingDirection.Turn(TurningDirection.LEFT);
+        }
+        
+        /// <summary>
+        /// Turn the robot in the right direction.
+        /// </summary>
+        public void TurnRight()
+        {
+            if (!HasBeenPlaced)
+                return;
+
+            FacingDirection.Turn(TurningDirection.RIGHT);
         }
 
         /// <summary>

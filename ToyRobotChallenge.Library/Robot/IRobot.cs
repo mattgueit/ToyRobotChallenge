@@ -4,9 +4,10 @@ namespace ToyRobotChallenge.Library.Robot
 {
     public interface IRobot
     {
-        void Place(Coordinates position, CardinalPoint direction);
+        void Place(int x, int y, CardinalPoint direction);
         void Move();
-        void Turn(TurningDirection direction);
+        void TurnLeft();
+        void TurnRight();
         string Report();
         void Reset();
     }

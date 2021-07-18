@@ -4,6 +4,6 @@ namespace ToyRobotChallenge.Commands
 {
     public interface ICommandParser
     {
-        List<string> RetrieveValidCommands(string fileName);
+        List<Command> RetrieveValidCommands(string fileName);
     }
 }

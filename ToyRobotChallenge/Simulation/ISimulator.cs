@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using ToyRobotChallenge.Commands;
 
 namespace ToyRobotChallenge.Simulation
 {
     public interface ISimulator
     {
-        void ExecuteRobotCommands(List<string> commands);
+        void ExecuteRobotCommands(List<Command> commands);
     }
 }
