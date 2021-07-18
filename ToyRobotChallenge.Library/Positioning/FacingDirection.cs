@@ -16,11 +16,11 @@
 
         public void Turn(TurningDirection direction)
         {
-            if (direction == TurningDirection.Left)
+            if (direction == TurningDirection.LEFT)
             {
                 TurnLeft();
             }
-            else if (direction == TurningDirection.Right)
+            else if (direction == TurningDirection.RIGHT)
             {
                 TurnRight();
             }
@@ -28,41 +28,41 @@
 
         private void TurnLeft()
         {
-            if (CardinalPoint == CardinalPoint.North)
+            if (CardinalPoint == CardinalPoint.NORTH)
             {
-                CardinalPoint = CardinalPoint.West;
+                CardinalPoint = CardinalPoint.WEST;
             }
-            else if (CardinalPoint == CardinalPoint.East)
+            else if (CardinalPoint == CardinalPoint.EAST)
             {
-                CardinalPoint = CardinalPoint.North;
+                CardinalPoint = CardinalPoint.NORTH;
             }
-            else if (CardinalPoint == CardinalPoint.South)
+            else if (CardinalPoint == CardinalPoint.SOUTH)
             {
-                CardinalPoint = CardinalPoint.East;
+                CardinalPoint = CardinalPoint.EAST;
             }
-            else if (CardinalPoint == CardinalPoint.West)
+            else if (CardinalPoint == CardinalPoint.WEST)
             {
-                CardinalPoint = CardinalPoint.South;
+                CardinalPoint = CardinalPoint.SOUTH;
             }
         }
 
         private void TurnRight()
         {
-            if (CardinalPoint == CardinalPoint.North)
+            if (CardinalPoint == CardinalPoint.NORTH)
             {
-                CardinalPoint = CardinalPoint.East;
+                CardinalPoint = CardinalPoint.EAST;
             }
-            else if (CardinalPoint == CardinalPoint.East)
+            else if (CardinalPoint == CardinalPoint.EAST)
             {
-                CardinalPoint = CardinalPoint.South;
+                CardinalPoint = CardinalPoint.SOUTH;
             }
-            else if (CardinalPoint == CardinalPoint.South)
+            else if (CardinalPoint == CardinalPoint.SOUTH)
             {
-                CardinalPoint = CardinalPoint.West;
+                CardinalPoint = CardinalPoint.WEST;
             }
-            else if (CardinalPoint == CardinalPoint.West)
+            else if (CardinalPoint == CardinalPoint.WEST)
             {
-                CardinalPoint = CardinalPoint.North;
+                CardinalPoint = CardinalPoint.NORTH;
             }
         }
     }

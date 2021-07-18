@@ -2,19 +2,19 @@
 
 namespace ToyRobotChallenge.Library.Environment
 {
-    public class Board : IBoard
+    public class Table : ITable
     {
         private readonly int minX = 0;
         private readonly int minY = 0;
         private readonly int maxX = 5;
         private readonly int maxY = 5;
 
-        public Board()
+        public Table()
         {
             // default size: 5 x 5
         }
 
-        public Board(int x, int y)
+        public Table(int x, int y)
         {
             maxX = x;
             maxY = y;

@@ -1,20 +1,40 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
+using ToyRobotChallenge.Commands;
+using ToyRobotChallenge.Simulation;
 
 namespace ToyRobotChallenge
 {
     public class Application
     {
+        private readonly ILogger<Application> _logger;
+        private readonly ISimulator _simulator;
+        private readonly ICommandParser _commandParser;
+
+        public Application(ILogger<Application> logger, ISimulator simulator, ICommandParser commandParser)
+        {
+            _logger = logger;
+            _simulator = simulator;
+            _commandParser = commandParser;
+        }
+
         public void Run()
         {
-            // TODO: replace with actual execution
+            _logger.LogInformation("Starting Toy Robot Application...");
 
-            Console.WriteLine("Running...");
+            var validCommands = _commandParser.RetrieveValidCommands("commands.txt");
 
-            Console.ReadLine();
+            if (validCommands.Any())
+            {
+                _simulator.ExecuteRobotCommands(validCommands);
+            }
+            else
+            {
+                _logger.LogDebug("No valid commands found");
+            }
+
+            Console.ReadKey();
         }
     }
 }

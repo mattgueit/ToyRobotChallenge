@@ -1,5 +1,6 @@
 ﻿using ToyRobotChallenge.Library.Environment;
 using ToyRobotChallenge.Library.Positioning;
+using Microsoft.Extensions.Logging;
 
 namespace ToyRobotChallenge.Library.Robot
 {
@@ -9,10 +10,13 @@ namespace ToyRobotChallenge.Library.Robot
         private Coordinates Position { get; set; }
         private FacingDirection FacingDirection { get; set; }
 
-        private readonly IBoard _board = new Board();
+        private readonly ITable _table;
+        private readonly ILogger<Robot> _logger;
 
-        public Robot()
+        public Robot(ITable table, ILogger<Robot> logger)
         {
+            _table = table;
+            _logger = logger;
         }
 
         /// <summary>
@@ -20,7 +24,9 @@ namespace ToyRobotChallenge.Library.Robot
         /// </summary>
         public void Place(Coordinates position, CardinalPoint cardinalPoint)
         {
-            if (_board.IsValidPosition(position))
+            _logger.LogDebug($"Placing the robot in position: ({position.X},{position.Y}) facing {cardinalPoint}");
+
+            if (_table.IsValidPosition(position))
             {
                 Position = position;
                 FacingDirection = new FacingDirection(cardinalPoint);
@@ -42,7 +48,7 @@ namespace ToyRobotChallenge.Library.Robot
 
             var nextPosition = DetermineNextPosition();
 
-            if (_board.IsValidPosition(nextPosition))
+            if (_table.IsValidPosition(nextPosition))
             {
                 Position = nextPosition;
             }
@@ -79,24 +85,29 @@ namespace ToyRobotChallenge.Library.Robot
         {
             var position = new Coordinates(Position.X, Position.Y);
 
-            if (FacingDirection.CardinalPoint == CardinalPoint.North)
+            if (FacingDirection.CardinalPoint == CardinalPoint.NORTH)
             {
                 position.Y += 1;
             }
-            else if (FacingDirection.CardinalPoint == CardinalPoint.South)
+            else if (FacingDirection.CardinalPoint == CardinalPoint.SOUTH)
             {
                 position.Y -= 1;
             }
-            else if (FacingDirection.CardinalPoint == CardinalPoint.East)
+            else if (FacingDirection.CardinalPoint == CardinalPoint.EAST)
             {
                 position.X += 1;
             }
-            else if (FacingDirection.CardinalPoint == CardinalPoint.West)
+            else if (FacingDirection.CardinalPoint == CardinalPoint.WEST)
             {
                 position.X -= 1;
             }
 
             return position;
+        }
+
+        public void Reset()
+        {
+            HasBeenPlaced = false;
         }
     }
 }

@@ -8,5 +8,6 @@ namespace ToyRobotChallenge.Library.Robot
         void Move();
         void Turn(TurningDirection direction);
         string Report();
+        void Reset();
     }
 }
