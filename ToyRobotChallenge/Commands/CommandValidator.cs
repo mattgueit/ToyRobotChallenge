@@ -3,6 +3,9 @@ using ToyRobotChallenge.Library.Positioning;
 
 namespace ToyRobotChallenge.Commands
 {
+    /// <summary>
+    /// Validation logic for commands.
+    /// </summary>
     public static class CommandValidator
     {
         /// <summary>

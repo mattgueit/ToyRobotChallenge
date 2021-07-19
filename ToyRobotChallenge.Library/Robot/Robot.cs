@@ -4,6 +4,9 @@ using Microsoft.Extensions.Logging;
 
 namespace ToyRobotChallenge.Library.Robot
 {
+    /// <summary>
+    /// This robot executes a specific set of commands. It does not want to fall of the table.
+    /// </summary>
     public class Robot : IRobot
     {
         private bool HasBeenPlaced { get; set; } = false;

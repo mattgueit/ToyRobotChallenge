@@ -2,6 +2,9 @@
 
 namespace ToyRobotChallenge.Commands
 {
+    /// <summary>
+    /// Single and central place to store valid command names.
+    /// </summary>
     public static class ValidCommands
     {
         public static string PlaceCommandName = "PLACE";
@@ -19,6 +22,9 @@ namespace ToyRobotChallenge.Commands
             ReportCommandName
         };
 
+        /// <summary>
+        /// Is my command valid?
+        /// </summary>
         public static bool Contains(string commandString)
         {
             return _validCommandSet.Contains(commandString);

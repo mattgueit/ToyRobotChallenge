@@ -6,6 +6,9 @@ using Microsoft.Extensions.Logging;
 
 namespace ToyRobotChallenge.Simulation
 {
+    /// <summary>
+    /// Simulator is responsible for feeding specific commands to Robot.
+    /// </summary>
     public class Simulator : ISimulator
     {
         private readonly ILogger<Simulator> _logger;
@@ -17,6 +20,10 @@ namespace ToyRobotChallenge.Simulation
             _robot = robot;
         }
 
+        /// <summary>
+        /// Execute all robot commands.
+        /// </summary>
+        /// <param name="commands"></param>
         public void ExecuteRobotCommands(List<Command> commands)
         {
             _logger.LogInformation("Starting Simulator...");

@@ -1,5 +1,8 @@
 ﻿namespace ToyRobotChallenge.Library.Positioning
 {
+    /// <summary>
+    /// Simple pair of X and Y points
+    /// </summary>
     public class Coordinates
     {
         public int X { get; set; }

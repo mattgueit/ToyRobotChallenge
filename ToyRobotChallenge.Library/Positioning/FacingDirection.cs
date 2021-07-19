@@ -1,5 +1,8 @@
 ﻿namespace ToyRobotChallenge.Library.Positioning
 {
+    /// <summary>
+    /// Given a direction that I am facing, what direction will I be looking if I turn left or right?
+    /// </summary>
     public class FacingDirection
     {
         public CardinalPoint CardinalPoint { get; private set; }

@@ -2,10 +2,12 @@
 using System.Linq;
 using ToyRobotChallenge.Data;
 using Microsoft.Extensions.Logging;
-using System.Text.RegularExpressions;
 
 namespace ToyRobotChallenge.Commands
 {
+    /// <summary>
+    /// Retrieves valid commmands.
+    /// </summary>
     public class CommandParser : ICommandParser
     {
         private readonly ILogger<CommandParser> _logger;
@@ -17,42 +19,43 @@ namespace ToyRobotChallenge.Commands
             _commandDataReader = commandDataReader;
         }
 
+        /// <summary>
+        /// Uses the command data reader to retrieve all commands, then create commands for all of those that are valid.
+        /// </summary>
         public List<Command> RetrieveValidCommands(string fileName)
         {
             var validCommands = new List<Command>();
 
-            var commands = _commandDataReader.RetrieveCommands(fileName);
+            var rawCommands = _commandDataReader.RetrieveCommands(fileName);
 
-            if (!commands.Any())
+            if (!rawCommands.Any())
             {
                 _logger.LogDebug("No commands found for file {fileName}.", fileName);
                 return validCommands;
             }
 
-            validCommands = CreateValidCommands(commands);
+            validCommands = CreateValidCommands(rawCommands);
 
             return validCommands;
         }
 
         /// <summary>
-        /// We should expect invalid commands, but ignore them. So let's just pick out the valid ones.
+        /// We should expect invalid commands and ignore them. So just pick out the valid ones.
         /// </summary>
-        /// <param name="commandNames"></param>
-        /// <returns></returns>
-        private List<Command> CreateValidCommands(List<string> commandNames)
+        private List<Command> CreateValidCommands(List<string> rawCommands)
         {
             var validCommands = new List<Command>();
 
             // the amount of indentation here isn't clean - consider refactoring.
-            for (int index = 0; index < commandNames.Count; index++)
+            for (int index = 0; index < rawCommands.Count; index++)
             {
-                var commandName = commandNames[index];
+                var command = rawCommands[index];
 
-                if (commandName.Length >= 5 && commandName.Substring(0, 5) == ValidCommands.PlaceCommandName)
+                if (command.Length >= 5 && command.Substring(0, 5) == ValidCommands.PlaceCommandName)
                 {
-                    if (index + 1 < commandNames.Count)
+                    if (index + 1 < rawCommands.Count) // lets not throw an IndexOutOfRangeException
                     {
-                        var commandParameters = commandNames[index + 1];
+                        var commandParameters = rawCommands[index + 1];
 
                         if (CommandValidator.PlaceParametersAreValid(commandParameters))
                         {
@@ -62,9 +65,9 @@ namespace ToyRobotChallenge.Commands
                 }
                 else
                 {
-                    if (CommandValidator.IsCommandValid(commandName))
+                    if (CommandValidator.IsCommandValid(command))
                     {
-                        validCommands.Add(CreateCommand(commandName));
+                        validCommands.Add(CreateCommand(command));
                     }
                 }
             }

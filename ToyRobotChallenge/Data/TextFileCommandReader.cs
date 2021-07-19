@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using Microsoft.Extensions.Logging;
 
 namespace ToyRobotChallenge.Data
 {
+    /// <summary>
+    /// Reads commands from text files.
+    /// </summary>
     public class TextFileCommandReader : ICommandDataReader
     {
         private readonly ILogger<TextFileCommandReader> _logger;
@@ -14,6 +16,9 @@ namespace ToyRobotChallenge.Data
             _logger = logger;
         }
 
+        /// <summary>
+        /// Retrieve all words (commands) found in a text file.
+        /// </summary>
         public List<string> RetrieveCommands(string fileName)
         {
             _logger.LogDebug("Retrieving commands from text file: {fileName}", fileName);

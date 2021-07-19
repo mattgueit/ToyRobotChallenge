@@ -2,6 +2,9 @@
 
 namespace ToyRobotChallenge.Library.Environment
 {
+    /// <summary>
+    /// A table with a fixed size where robots roam.
+    /// </summary>
     public class Table : ITable
     {
         private readonly int minX = 0;
@@ -21,7 +24,7 @@ namespace ToyRobotChallenge.Library.Environment
         }
 
         /// <summary>
-        /// Will the robot stay on the board?
+        /// Will the robot stay on the table?
         /// </summary>
         public bool IsValidPosition(Coordinates position)
         {
