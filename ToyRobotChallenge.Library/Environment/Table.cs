@@ -9,18 +9,18 @@ namespace ToyRobotChallenge.Library.Environment
     {
         private readonly int minX = 0;
         private readonly int minY = 0;
-        private readonly int maxX = 5;
-        private readonly int maxY = 5;
+        private readonly int maxX = 4;
+        private readonly int maxY = 4;
 
         public Table()
         {
-            // default size: 5 x 5
+            // default size: 5 x 5 - restricted from (0,0) to (4,4)
         }
 
         public Table(int x, int y)
         {
-            maxX = x;
-            maxY = y;
+            maxX = x - 1;
+            maxY = y - 1;
         }
 
         /// <summary>

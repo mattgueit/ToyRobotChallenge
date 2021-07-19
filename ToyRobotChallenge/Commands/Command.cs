@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace ToyRobotChallenge.Commands
+﻿namespace ToyRobotChallenge.Commands
 {
     /// <summary>
     /// Basic command - all commands have a name.

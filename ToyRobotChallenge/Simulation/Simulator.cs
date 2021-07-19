@@ -26,8 +26,6 @@ namespace ToyRobotChallenge.Simulation
         /// <param name="commands"></param>
         public void ExecuteRobotCommands(List<Command> commands)
         {
-            _logger.LogInformation("Starting Simulator...");
-
             foreach(var command in commands)
             {
                 _logger.LogDebug("Executing command: {CommandName}", command.CommandName);

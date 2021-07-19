@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text.RegularExpressions;
 using Microsoft.Extensions.Logging;
 
 namespace ToyRobotChallenge.Data
@@ -22,29 +24,19 @@ namespace ToyRobotChallenge.Data
         public List<string> RetrieveCommands(string fileName)
         {
             _logger.LogDebug("Retrieving commands from text file: {fileName}", fileName);
-            var commands = new List<string>();
 
             var path = Path.Combine(Directory.GetCurrentDirectory(), fileName);
 
             if (!File.Exists(path))
             {
-                _logger.LogDebug("File not found for given path: {path}.", path);
-                return commands;
+                _logger.LogInformation("File not found for given path: {path}.", path);
+                return new List<string>();
             }
 
-            var lines = File.ReadAllLines(path);
+            var fileText = File.ReadAllText(path);
 
-            foreach (var line in lines)
-            {
-                var commandsPerLine = line.Split(" ");
-
-                foreach (var command in commandsPerLine)
-                {
-                    commands.Add(command);
-                }
-            }
-
-            return commands;
+            // split by spaces, tabs and new lines
+            return Regex.Split(fileText, @"[\s\t\n]+").ToList();
         }
     }
 }

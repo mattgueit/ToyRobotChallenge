@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using ToyRobotChallenge.Data;
 using Microsoft.Extensions.Logging;
 
@@ -24,17 +23,9 @@ namespace ToyRobotChallenge.Commands
         /// </summary>
         public List<Command> RetrieveValidCommands(string fileName)
         {
-            var validCommands = new List<Command>();
-
             var rawCommands = _commandDataReader.RetrieveCommands(fileName);
 
-            if (!rawCommands.Any())
-            {
-                _logger.LogDebug("No commands found for file {fileName}.", fileName);
-                return validCommands;
-            }
-
-            validCommands = CreateValidCommands(rawCommands);
+            var validCommands = CreateValidCommands(rawCommands);
 
             return validCommands;
         }

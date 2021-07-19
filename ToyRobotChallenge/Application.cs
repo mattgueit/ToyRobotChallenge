@@ -14,7 +14,6 @@ namespace ToyRobotChallenge
         private readonly ILogger<Application> _logger;
         private readonly ISimulator _simulator;
         private readonly ICommandParser _commandParser;
-        private static readonly string _defaultFileName = "commands.txt";
 
         public Application(ILogger<Application> logger, ISimulator simulator, ICommandParser commandParser)
         {
@@ -28,13 +27,19 @@ namespace ToyRobotChallenge
         /// </summary>
         public void Run(string[] args)
         {
-            _logger.LogInformation("Starting Toy Robot Application...");
+            var fileName = GetFileNameFromArgs(args);
 
-            var validCommands = _commandParser.RetrieveValidCommands(_defaultFileName);
+            if (fileName == null)
+            {
+                _logger.LogInformation("No filename was specified. Please provide the filename as an argument: -f <filename>");
+                return;
+            }
+
+            var validCommands = _commandParser.RetrieveValidCommands(fileName);
 
             if (!validCommands.Any())
             {
-                _logger.LogDebug("No valid commands found");
+                _logger.LogInformation("No valid commands found");
                 return;
             }
 
@@ -46,8 +51,16 @@ namespace ToyRobotChallenge
             {
                 _logger.LogError("Encountered an error during simulation: {Message}", ex.Message);
             }
+        }
 
-            Console.ReadKey();
+        private string GetFileNameFromArgs(string[] args)
+        {
+            if (args.Length < 2 || args[0] != "-f")
+            {
+                return null;
+            }
+
+            return args[1];
         }
     }
 }
