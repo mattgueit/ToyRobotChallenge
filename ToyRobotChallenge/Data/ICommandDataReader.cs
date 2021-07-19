@@ -1,7 +1,9 @@
-﻿namespace ToyRobotChallenge.Data
+﻿using System.Collections.Generic;
+
+namespace ToyRobotChallenge.Data
 {
     public interface ICommandDataReader
     {
-        string[] RetrieveCommands(string fileName);
+        List<string> RetrieveCommands(string fileName);
     }
 }

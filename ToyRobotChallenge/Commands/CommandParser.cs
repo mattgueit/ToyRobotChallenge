@@ -29,7 +29,7 @@ namespace ToyRobotChallenge.Commands
                 return validCommands;
             }
 
-            validCommands = PickOutValidCommands(commands);
+            validCommands = CreateValidCommands(commands);
 
             return validCommands;
         }
@@ -39,26 +39,32 @@ namespace ToyRobotChallenge.Commands
         /// </summary>
         /// <param name="commandNames"></param>
         /// <returns></returns>
-        private List<Command> PickOutValidCommands(string[] commandNames)
+        private List<Command> CreateValidCommands(List<string> commandNames)
         {
             var validCommands = new List<Command>();
 
-            foreach (var commandName in commandNames)
+            // the amount of indentation here isn't clean - consider refactoring.
+            for (int index = 0; index < commandNames.Count; index++)
             {
-                var formattedCommand = FormatCommand(commandName);
+                var commandName = commandNames[index];
 
-                if (formattedCommand.Length >= 5 && formattedCommand.Substring(0, 5) == ValidCommands.PlaceCommandName)
+                if (commandName.Length >= 5 && commandName.Substring(0, 5) == ValidCommands.PlaceCommandName)
                 {
-                    if (CommandValidator.PlaceParametersAreValid(formattedCommand))
+                    if (index + 1 < commandNames.Count)
                     {
-                        validCommands.Add(CreatePlaceCommand(formattedCommand));
+                        var commandParameters = commandNames[index + 1];
+
+                        if (CommandValidator.PlaceParametersAreValid(commandParameters))
+                        {
+                            validCommands.Add(CreatePlaceCommand(commandParameters));
+                        }
                     }
                 }
                 else
                 {
-                    if (CommandValidator.IsCommandValid(formattedCommand))
+                    if (CommandValidator.IsCommandValid(commandName))
                     {
-                        validCommands.Add(CreateCommand(formattedCommand));
+                        validCommands.Add(CreateCommand(commandName));
                     }
                 }
             }
@@ -77,10 +83,8 @@ namespace ToyRobotChallenge.Commands
         /// <summary>
         /// Creates a PLACE command.
         /// </summary>
-        private PlaceCommand CreatePlaceCommand(string commandString)
+        private PlaceCommand CreatePlaceCommand(string commandParameters)
         {
-            var commandParameters = commandString.Substring(ValidCommands.PlaceCommandName.Length);
-
             var commandParameterList = commandParameters.Split(",");
 
             return new PlaceCommand(
@@ -88,26 +92,6 @@ namespace ToyRobotChallenge.Commands
                 int.Parse(commandParameterList[1]),    // Y
                 commandParameterList[2]                // CardinalPoint
             );
-        }
-
-        /// <summary>
-        /// It makes it easier to validate and parse when there are no whitespaces and all characters are upper case.
-        /// </summary>
-        private string FormatCommand(string command)
-        {
-            var formattedCommand = RemoveWhitespace(command);
-
-            formattedCommand = formattedCommand.ToUpper();
-
-            return formattedCommand;
-        }
-
-        /// <summary>
-        /// Remove whitespaces from command
-        /// </summary>
-        private static string RemoveWhitespace(string command)
-        {
-            return Regex.Replace(command, @"\s+", "");
         }
     }
 }

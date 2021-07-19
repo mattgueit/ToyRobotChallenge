@@ -117,10 +117,5 @@ namespace ToyRobotChallenge.Library.Robot
 
             return position;
         }
-
-        public void Reset()
-        {
-            HasBeenPlaced = false;
-        }
     }
 }

@@ -21,9 +21,7 @@ namespace ToyRobotChallenge.Commands
 
         public static bool Contains(string commandString)
         {
-            var upperCommandString = commandString.ToUpper();
-
-            return _validCommandSet.Contains(upperCommandString);
+            return _validCommandSet.Contains(commandString);
         }
     }
 }

@@ -20,9 +20,12 @@ namespace ToyRobotChallenge
 
             var application = ActivatorUtilities.CreateInstance<Application>(host.Services);
 
-            application.Run();
+            application.Run(args);
         }
 
+        /// <summary>
+        /// Set up Dependency Injection and Serilog before the application starts.
+        /// </summary>
         static IHost StartupConfiguration()
         {
             var builder = new ConfigurationBuilder();
@@ -35,10 +38,10 @@ namespace ToyRobotChallenge
 
             // instantiate DI container
             var host = Host.CreateDefaultBuilder()
-                .ConfigureServices((context, services) =>
+                .ConfigureServices((services) =>
                 {
                     services.AddSingleton<ISimulator, Simulator>();
-                    services.AddSingleton<ICommandDataReader, TextFileReader>();
+                    services.AddSingleton<ICommandDataReader, TextFileCommandReader>();
                     services.AddSingleton<ICommandParser, CommandParser>();
 
                     services.AddSingleton<IRobot, Robot>();
@@ -50,6 +53,9 @@ namespace ToyRobotChallenge
             return host;
         }
 
+        /// <summary>
+        /// This is needed to read from appsettings.json.
+        /// </summary>
         static void ConfigurationSetup(IConfigurationBuilder builder)
         {
             builder.SetBasePath(Directory.GetCurrentDirectory())

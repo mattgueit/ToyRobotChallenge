@@ -11,7 +11,7 @@
 
         public string Report()
         {
-            return CardinalPoint.ToString().ToUpper();
+            return CardinalPoint.ToString();
         }
 
         public void Turn(TurningDirection direction)

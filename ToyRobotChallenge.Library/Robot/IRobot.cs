@@ -9,6 +9,5 @@ namespace ToyRobotChallenge.Library.Robot
         void TurnLeft();
         void TurnRight();
         string Report();
-        void Reset();
     }
 }

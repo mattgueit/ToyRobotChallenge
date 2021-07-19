@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using ToyRobotChallenge.Library.Positioning;
 
 namespace ToyRobotChallenge.Commands
@@ -22,12 +21,11 @@ namespace ToyRobotChallenge.Commands
         /// <summary>
         /// The PLACE command requires a bit more validation. Method returns true if valid.
         /// </summary>
-        public static bool PlaceParametersAreValid(string placeCommand)
+        public static bool PlaceParametersAreValid(string placeParameters)
         {
-            var placeParameters = placeCommand.Substring(5);
-
             var commaSeparatedParameters = placeParameters.Split(",");
 
+            // [X, Y, F]
             if (commaSeparatedParameters.Length != 3)
             {
                 return false;
@@ -45,7 +43,7 @@ namespace ToyRobotChallenge.Commands
                 return false;
             }
 
-            // NORTH, SOUTH, EAST, or WEST
+            // F
             if (!Enum.IsDefined(typeof(CardinalPoint), commaSeparatedParameters[2]))
             {
                 return false;

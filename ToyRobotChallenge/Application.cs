@@ -19,7 +19,7 @@ namespace ToyRobotChallenge
             _commandParser = commandParser;
         }
 
-        public void Run()
+        public void Run(string[] args)
         {
             _logger.LogInformation("Starting Toy Robot Application...");
 
