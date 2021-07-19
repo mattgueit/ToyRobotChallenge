@@ -53,7 +53,7 @@ namespace ToyRobotChallenge
             }
         }
 
-        private string GetFileNameFromArgs(string[] args)
+        private static string GetFileNameFromArgs(string[] args)
         {
             if (args.Length < 2 || args[0] != "-f")
             {

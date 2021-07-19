@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31321.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToyRobotChallenge.Library", "ToyRobotChallenge.Library\ToyRobotChallenge.Library.csproj", "{943CB2B2-D453-4E07-83B9-1D8FE1C6A3B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToyRobotChallenge.Library", "ToyRobotChallenge.Library\ToyRobotChallenge.Library.csproj", "{943CB2B2-D453-4E07-83B9-1D8FE1C6A3B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToyRobotChallenge.Tests.Unit", "ToyRobotChallenge.Tests.Unit\ToyRobotChallenge.Tests.Unit.csproj", "{7B540823-7FC9-4303-B8F0-59B6E28E3199}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToyRobotChallenge", "ToyRobotChallenge\ToyRobotChallenge.csproj", "{4E92528F-67A0-4A44-AD57-589BEF320552}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToyRobotChallenge", "ToyRobotChallenge\ToyRobotChallenge.csproj", "{4E92528F-67A0-4A44-AD57-589BEF320552}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToyRobotChallenge.Library.Tests.Unit", "ToyRobotChallenge.Library.Tests.Unit\ToyRobotChallenge.Library.Tests.Unit.csproj", "{DCD8F4C6-24F8-44C6-A22B-7445E89CFB49}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToyRobotChallenge.Tests.Unit", "ToyRobotChallenge.Tests.Unit\ToyRobotChallenge.Tests.Unit.csproj", "{DF1540FA-867B-4F07-871D-FC9FF9C8DFE1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,14 +21,18 @@ Global
 		{943CB2B2-D453-4E07-83B9-1D8FE1C6A3B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{943CB2B2-D453-4E07-83B9-1D8FE1C6A3B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{943CB2B2-D453-4E07-83B9-1D8FE1C6A3B6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7B540823-7FC9-4303-B8F0-59B6E28E3199}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7B540823-7FC9-4303-B8F0-59B6E28E3199}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7B540823-7FC9-4303-B8F0-59B6E28E3199}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7B540823-7FC9-4303-B8F0-59B6E28E3199}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4E92528F-67A0-4A44-AD57-589BEF320552}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4E92528F-67A0-4A44-AD57-589BEF320552}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E92528F-67A0-4A44-AD57-589BEF320552}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E92528F-67A0-4A44-AD57-589BEF320552}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCD8F4C6-24F8-44C6-A22B-7445E89CFB49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCD8F4C6-24F8-44C6-A22B-7445E89CFB49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCD8F4C6-24F8-44C6-A22B-7445E89CFB49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCD8F4C6-24F8-44C6-A22B-7445E89CFB49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF1540FA-867B-4F07-871D-FC9FF9C8DFE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF1540FA-867B-4F07-871D-FC9FF9C8DFE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF1540FA-867B-4F07-871D-FC9FF9C8DFE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF1540FA-867B-4F07-871D-FC9FF9C8DFE1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

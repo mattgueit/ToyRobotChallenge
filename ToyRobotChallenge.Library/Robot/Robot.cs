@@ -9,9 +9,9 @@ namespace ToyRobotChallenge.Library.Robot
     /// </summary>
     public class Robot : IRobot
     {
-        private bool HasBeenPlaced { get; set; } = false;
-        private Coordinates Position { get; set; }
-        private FacingDirection FacingDirection { get; set; }
+        public bool HasBeenPlaced { get; set; } = false;
+        public Coordinates Position { get; set; }
+        public FacingDirection FacingDirection { get; set; }
 
         private readonly ITable _table;
         private readonly ILogger<Robot> _logger;
@@ -87,9 +87,10 @@ namespace ToyRobotChallenge.Library.Robot
         public string Report()
         {
             if (!HasBeenPlaced)
+            { 
                 return string.Empty;
+            }
 
-            // TODO: consider whether or not the formatting belongs here
             return $"{Position.X},{Position.Y},{FacingDirection.Report()}"; 
         }
 

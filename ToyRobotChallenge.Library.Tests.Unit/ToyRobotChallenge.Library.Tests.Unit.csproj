@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ToyRobotChallenge\ToyRobotChallenge.csproj" />
+    <ProjectReference Include="..\ToyRobotChallenge.Library\ToyRobotChallenge.Library.csproj" />
   </ItemGroup>
 
 </Project>

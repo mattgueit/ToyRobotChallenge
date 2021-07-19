@@ -1,0 +1,160 @@
+# Ignore anything before first place
+# Expected 0,0,NORTH
+------------------------------
+MOVE
+REPORT
+LEFT
+RIGHT
+PLACE 0,0,NORTH
+REPORT
+
+
+# Basic place and move
+# Expected: 0,1,NORTH
+------------------------------
+PLACE 0,0,NORTH
+MOVE
+REPORT
+
+
+# Basic place, turn and move
+# Expected: 1,0,EAST
+------------------------------
+PLACE 0,0,NORTH
+RIGHT
+MOVE
+REPORT
+
+
+# Venture diagonally from corner to corner
+# Expected: 4,4,EAST
+------------------------------
+PLACE 0,0,NORTH
+MOVE
+RIGHT
+MOVE
+LEFT
+MOVE
+RIGHT
+MOVE
+LEFT
+MOVE
+RIGHT
+MOVE
+LEFT
+MOVE
+RIGHT
+MOVE
+REPORT
+
+
+# Full clockwise circle
+# Expected: 0,1,NORTH
+------------------------------
+PLACE 0,0,NORTH
+RIGHT
+RIGHT
+RIGHT
+RIGHT
+MOVE
+REPORT
+
+
+# Full anti-clockwise circle
+# Expected: 0,1,NORTH
+------------------------------
+PLACE 0,0,NORTH
+LEFT
+LEFT
+LEFT
+LEFT
+MOVE
+REPORT
+
+
+# Try to fall off the north edge (but don't)
+# Expected: 0,4,NORTH
+------------------------------
+PLACE 0,0,NORTH
+MOVE
+MOVE
+MOVE
+MOVE
+MOVE
+MOVE
+MOVE
+MOVE
+MOVE
+REPORT
+
+
+# Try to fall off the south edge (but don't)
+# Expected: 0,0,SOUTH
+------------------------------
+PLACE 0,4,SOUTH
+MOVE
+MOVE
+MOVE
+MOVE
+MOVE
+MOVE
+MOVE
+MOVE
+MOVE
+REPORT
+
+
+# Try to fall off the west edge (but don't)
+# Expected: 0,0,WEST
+------------------------------
+PLACE 4,0,WEST
+MOVE
+MOVE
+MOVE
+MOVE
+MOVE
+MOVE
+MOVE
+MOVE
+MOVE
+REPORT
+
+
+# Try to fall off the east edge
+# Expected: 4,0,EAST
+------------------------------
+PLACE 0,0,EAST
+MOVE
+MOVE
+MOVE
+MOVE
+MOVE
+MOVE
+MOVE
+MOVE
+MOVE
+REPORT
+
+
+# Multiple commands per line
+# Expected 3,3,EAST
+------------------------------
+PLACE 0,0,NORTH MOVE MOVE MOVE
+RIGHT MOVE MOVE MOVE REPORT
+
+
+# Tab-separated commands
+# Expected 0,1,NORTH
+------------------------------
+PLACE 0,0,NORTH			MOVE
+			REPORT
+
+
+# Multiple spaces between commands
+# Expected 1,2,NORTH
+------------------------------
+PLACE 0,0,NORTH
+RIGHT        MOVE
+LEFT    MOVE
+MOVE
+REPORT

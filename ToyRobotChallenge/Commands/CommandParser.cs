@@ -9,12 +9,10 @@ namespace ToyRobotChallenge.Commands
     /// </summary>
     public class CommandParser : ICommandParser
     {
-        private readonly ILogger<CommandParser> _logger;
         private readonly ICommandDataReader _commandDataReader;
 
-        public CommandParser(ILogger<CommandParser> logger, ICommandDataReader commandDataReader)
+        public CommandParser(ICommandDataReader commandDataReader)
         {
-            _logger = logger;
             _commandDataReader = commandDataReader;
         }
 

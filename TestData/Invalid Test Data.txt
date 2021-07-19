@@ -1,0 +1,49 @@
+# Ignore anything that isn't a recognised command
+# Expected 0,2,NORTH
+------------------------------
+PLACE 0,0,NORTH
+SKIP
+HOP
+JUMP
+SWIM
+BEEP BOOP
+MOVE
+MOVE
+REPORT
+
+
+# Ignore anything that isn't all in upper-case
+# Expected 2,2,EAST
+------------------------------
+Place 4,4,SOUTH
+place 1,1,WEST
+pLaCe 3,3,NORTH
+PLACE 2,2,EAST
+left
+move
+right
+move
+REPORT
+
+
+# Ignore commands containing special characters
+# Expected 2,2,EAST
+------------------------------
+PL@CE 4,4,SOUTH
+PLAC3 1,1,WEST
+PLA_CE 3,3,NORTH
+PLACE 2,2,EAST
+M0VE
+L`FT
+R!GHT
+REPORT
+
+
+# Ignore commands with a command as a substring
+# Expected 2,0,SOUTH
+------------------------------
+PLACE 2,1,SOUTH
+__MOVE__
+amiRIGHT
+MOVE
+REPORT
